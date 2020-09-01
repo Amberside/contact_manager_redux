@@ -1,4 +1,4 @@
-// this allows us to create a store to hold our this.state. 
+// this allows us to create a store to hold our state. 
 // Allows us to run any middleware as well
 import { createStore, applyMiddleware } from 'redux';
 // allows us to connect our state to our dev tools in browser.
@@ -14,7 +14,7 @@ const initialState = {};
 const middleware=[thunk];
 
 // create a store to hold our state.
-// this take 3 arguments. Reducer,state, enhacers. 
+// this take 3 arguments. Reducer,state, enhancers. 
 const store = createStore( 
   rootReducer, 
   initialState, 
