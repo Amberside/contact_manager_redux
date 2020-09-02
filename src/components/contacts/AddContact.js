@@ -1,8 +1,9 @@
 import React, { Component, Fragment } from 'react';
 import classnames from 'classnames';
 // import { v4 as uuidv4 } from 'uuid';
-import { Consumer } from '../../context';
-import axios from 'axios';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { addContact } from '../../actions/contactActions';
 
 class AddContact extends Component {
   // This is the state for the component, 
@@ -50,79 +51,73 @@ class AddContact extends Component {
     
     // create a newContact object 
     const newContact = {
-      // id: uuidv4(),
       name,
       email,
       phone
     }
-     // send the newcontact to an api or state managment.
-    console.log(newContact);
-    const res = await axios.post('https://jsonplaceholder.typicode.com/users', newContact);
-    // this is where we would call our dispatch function
-    dispatch({ type: 'ADD_CONTACT', payload: res.data});
-    // redirect the browser back to the contacts page ('/')
+    
+    // SUBMIT CONTACT
+    this.props.addContact(newContact);
+    
     this.props.history.push("/");
   }
   
   render() {
     const { name, email, phone, errors } = this.state;
     return (
-      <Consumer>
-        { value => {
-          const { dispatch } = value;
-          return (
-            <Fragment>
-              <h1 className="display-4 text-primary">Add New Contact</h1>
-              <div className="card mb-3">
-                <div className="card-header">Add Contact</div>
-                <div className="card-body">
-                  <form onSubmit={this.onSubmit.bind(this, dispatch)}>
-                    <div className="form-group">
-                      <label>Name</label>
-                      <input 
-                        type="text"  
-                        className={classnames("form-control", { 'is-invalid' : errors.name })  }
-                        placeholder="Name"
-                        name="name"
-                        value={name}
-                        onChange={this.onChange}
-                      />
-                      {errors.name && <div className='invalid-feedback'>{errors.name}</div>}
-                    </div>
-                    <div className="form-group">
-                      <label>Email</label>
-                      <input 
-                        type="email"  
-                        className={classnames("form-control", { 'is-invalid' : errors.email })  }
-                        placeholder="Email"
-                        name="email"
-                        value={email}
-                        onChange={this.onChange}
-                      />
-                      {errors.email && <div className='invalid-feedback'>{errors.email}</div>}
-                    </div>
-                    <div className="form-group">
-                      <label>Phone</label>
-                      <input 
-                        type="text"  
-                        className={classnames("form-control", { 'is-invalid' : errors.phone })  } 
-                        placeholder="Phone"
-                        name="phone"
-                        value={phone}
-                        onChange={this.onChange}
-                      />
-                      {errors.phone && <div className='invalid-feedback'>{errors.phone}</div>}
-                    </div>
-                    <input type="submit" value="Add Contact" className="btn btn-light btn-block" />
-                  </form>
-                </div>
-                
-              </div>   {/* end of the card */}
-            </Fragment>  
-           )}}
-      </Consumer>
+      <Fragment>
+        <h1 className="display-4 text-primary">Add New Contact</h1>
+        <div className="card mb-3">
+          <div className="card-header">Add Contact</div>
+          <div className="card-body">
+            <form onSubmit={this.onSubmit}>
+              <div className="form-group">
+                <label>Name</label>
+                <input 
+                  type="text"  
+                  className={classnames("form-control", { 'is-invalid' : errors.name })  }
+                  placeholder="Name"
+                  name="name"
+                  value={name}
+                  onChange={this.onChange}
+                />
+                {errors.name && <div className='invalid-feedback'>{errors.name}</div>}
+              </div>
+              <div className="form-group">
+                <label>Email</label>
+                <input 
+                  type="email"  
+                  className={classnames("form-control", { 'is-invalid' : errors.email })  }
+                  placeholder="Email"
+                  name="email"
+                  value={email}
+                  onChange={this.onChange}
+                />
+                {errors.email && <div className='invalid-feedback'>{errors.email}</div>}
+              </div>
+              <div className="form-group">
+                <label>Phone</label>
+                <input 
+                  type="text"  
+                  className={classnames("form-control", { 'is-invalid' : errors.phone })  } 
+                  placeholder="Phone"
+                  name="phone"
+                  value={phone}
+                  onChange={this.onChange}
+                />
+                {errors.phone && <div className='invalid-feedback'>{errors.phone}</div>}
+              </div>
+              <input type="submit" value="Add Contact" className="btn btn-light btn-block" />
+            </form>
+          </div>
+        </div>   {/* end of the card */}
+      </Fragment>  
     )
   }
 }
 
-export default AddContact;
+AddContact.propTypes = {
+  addContact: PropTypes.func.isRequired,
+}
+
+export default connect(null, { addContact })(AddContact);
