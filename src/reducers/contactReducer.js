@@ -48,7 +48,7 @@ export default function(state = initialState, action) {
         ...state,
         contacts: state.contacts.map(contact =>
           contact.id === action.payload.id  
-            ? ( contact = action.payload)
+            ? ( contact = action.payload )
             : contact
           )
       }
