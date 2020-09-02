@@ -6,7 +6,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 // middleware that allows to do async actions.
 import thunk from 'redux-thunk';
 // This our root reducer.
-import rootReducer from './reducers/rootReducer.js';
+import rootReducer from './reducers/rootReducer';
 
 // create initialState - empty object.
 const initialState = {};
