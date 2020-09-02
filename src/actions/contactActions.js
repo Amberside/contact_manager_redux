@@ -1,4 +1,4 @@
-import { GET_CONTACTS, GET_CONTACT, DELETE_CONTACT } from './type';
+import { GET_CONTACTS, GET_CONTACT, DELETE_CONTACT, DEL_ERROR } from './type';
 import axios from 'axios';
 
 export const getContacts = () => async dispatch => {
@@ -17,4 +17,19 @@ export const getContact = id => async dispatch => {
     type: GET_CONTACT,
     payload: res.data
   });
+}
+
+export const deleteContact = id => async dispatch => {
+  try {
+    await axios.delete(`https://jsonplaceholder.typicode.com/users/${id}`);
+    dispatch({
+      type: DELETE_CONTACT,
+      payload: id
+    })
+  } catch (error) {
+    dispatch({
+      type: DEL_ERROR,
+      payload: error
+   })
+  }
 }
