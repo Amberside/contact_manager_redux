@@ -1,10 +1,10 @@
 // import React and installed components
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+import PropTypes from 'prop-types'; //impt 
 
 import SingleContact from './SingleContact';
-import { getContacts } from '../../actions'
+import { getContacts } from '../../actions/contactActions';
 
 class Contacts extends Component {
   // get this contacts from the API
