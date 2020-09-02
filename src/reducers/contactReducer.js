@@ -24,12 +24,12 @@ export default function(state = initialState, action) {
         contacts: state.contacts.filter(
           contact => contact.id !== action.payload
         )
-      }
+      };
     case DEL_ERROR:
       return {
         ...state,
         errors: action.payload
-      }
+      };
       
     default:
       return state;
