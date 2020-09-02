@@ -51,6 +51,7 @@ class AddContact extends Component {
     
     // create a newContact object 
     const newContact = {
+      // id: uuidv4()
       name,
       email,
       phone
