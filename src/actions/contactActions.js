@@ -1,4 +1,11 @@
-import { GET_CONTACTS, GET_CONTACT, DELETE_CONTACT, DEL_ERROR } from './type';
+import { 
+  GET_CONTACTS, 
+  GET_CONTACT, 
+  DELETE_CONTACT, 
+  DEL_ERROR,
+  ADD_CONTACT,
+  UPDATE_CONTACT
+ } from './type';
 import axios from 'axios';
 
 export const getContacts = () => async dispatch => {
