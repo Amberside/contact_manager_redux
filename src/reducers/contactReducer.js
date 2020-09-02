@@ -42,7 +42,7 @@ export default function(state = initialState, action) {
         ...state,
         contacts: [action.payload, ...state.contacts],
         contact: action.payload
-      }
+      };
     case UPDATE_CONTACT:
       return {
         ...state,
@@ -51,7 +51,7 @@ export default function(state = initialState, action) {
             ? ( contact = action.payload )
             : contact
           )
-      }
+      };
       
     default:
       return state;
