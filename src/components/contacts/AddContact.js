@@ -25,7 +25,7 @@ class AddContact extends Component {
   }
 
   // this function will be called when the form is submitted.
-  onSubmit = async(dispatch, e) => {
+  onSubmit = (e) => {
     e.preventDefault();
     // creating variables to store our state values.
     const { name, email, phone } = this.state; // instead of typing this.state.name
